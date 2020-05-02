@@ -1,0 +1,46 @@
+*************************************************************************************************************
+HI
+Purpose: 	Describe what I did in order to implement what I was asked for in this assignment.
+Description:	This is README file for the homework assignment on spring-boot application, Docker and Kubernetes. 
+Environment: 	Linux on Ubuntu 16.04.5 VM
+Created by: 	Omri Sharvit
+**************************************************************************************************************
+
+Spring-boot Application:
+
+1) Installed Java 8 and configured $JAVA_HOME in system PATH
+2) Installed latest eclipse version for Java development
+3) Installed Maven(m2e) plugin for eclipse
+4) Created a Maven project called 'hw-assignment' 
+5) Added Spring-Boot framework as parent in the pom.xml
+6) Added dependency for spring-boot-starter-web in the pom.xml for having all that needs for creating a web application via spring-boot framework
+7) Created package for the 'main' class called 'io.Bottomline.hwAssignemnt'
+8) Created class 'BottomlineApiApp' with a static main function which is the SpringBootApplication
+9) Created class 'HelloController' for the RestController which contains the function helloworld to handle request to the root page('/') as described in the assignment
+10) Added support for 'uber' jar in the pom.xml file under the <build> section:
+	a) At first i tried use plain maven-build-plugin but encountered a problem to use spring-boot framework so i changed it to spring-boot-maven-plugin
+	b) Added the 'maven'assembly' under the <build> section with the descriptor of 'jar-with-dependencies' to create an 'uber' jar 
+11) build the application using 'mvn clean package' command from the 'hw-assignment' directory
+
+Docker container:
+
+1) Installed Docker latest version
+2) Created the 'Dockerfile' 
+3) Build it via termianl with the 'hw' tag 
+4) Run it via terminal 'docker run -p 9090:8080 hw' which maps the container 8080 port to the host port 9090 so the application can be accessed via 'localhost:9090/'
+
+Kubernetes Deployment:
+
+1) installed 'kubctl' 
+2) installed 'minikube' with 'vm-driver=none' 
+3) launched 'minikube' 
+4) Created a deployment file 'deploy.yaml' for the hw container and tried to deploy it
+	a) The deployment failed as i didn't had a user and repository on the docker hub website
+	b) I created a user 'omrisg' and a repository 'bottomline' (https://hub.docker.com/repository/docker/omrisg/bottomline)
+	c) I tagged the hw container as omrisg/bottomline:hw and pushed it to my docker hub repository
+5) Deployed the conatainer successfully
+6) Connected to the 'minikube' kubernetes dashboard and got the IP of the deployed cluster
+7) Was able to access my spring-boot application using a brower as 'IP_ADDR:8080'
+
+
+  
